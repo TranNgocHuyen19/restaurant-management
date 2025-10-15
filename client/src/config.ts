@@ -14,4 +14,5 @@ if (!configProject.success) {
   console.error(configProject.error.issues);
   throw new Error("Invalid client environment variables");
 }
-export const envConfig = configProject.data;
+const envConfig = configProject.data;
+export default envConfig;
