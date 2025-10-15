@@ -3,6 +3,7 @@ import { clsx, type ClassValue } from "clsx";
 import { UseFormSetError } from "react-hook-form";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
+import { is } from "zod/v4/locales";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -34,4 +35,14 @@ export const handleErrorApi = ({
       duration: duration ?? 5000,
     });
   }
+};
+
+const isBrowser = typeof window !== "undefined";
+
+export const getAccessTokenFromLocalStorage = () => {
+  return isBrowser ? localStorage.getItem("accessToken") : null;
+};
+
+export const getRefreshTokenFromLocalStorage = () => {
+  return isBrowser ? localStorage.getItem("refreshToken") : null;
 };
