@@ -1,4 +1,4 @@
-import authApiRequest from "@/app/apiRequests/auth";
+import authApiRequest from "@/apiRequests/auth";
 import { LoginBodyType } from "@/schemaValidations/auth.schema";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
         status: error.status,
       });
     } else {
-      Response.json(
+      return Response.json(
         {
           message: "Có lỗi xảy ra",
         },

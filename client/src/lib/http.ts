@@ -79,7 +79,7 @@ const request = async <Response>(
         };
 
   if (isClient) {
-    const accessToken = localStorage.getItem("sessionToken");
+    const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       baseHeaders.Authorization = `Bearer ${accessToken}`;
     }

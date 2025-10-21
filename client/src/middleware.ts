@@ -4,7 +4,6 @@ import type { NextRequest } from "next/server";
 const privatePaths = ["/manage"];
 const unAuthPaths = ["/login"];
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuth = Boolean(request.cookies.get("accessToken")?.value);
@@ -17,7 +16,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: ["/manage/:path*", "/login"],
 };
