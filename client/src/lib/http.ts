@@ -133,6 +133,8 @@ const request = async <Response>(
         // Vì nếu rơi vào trường hợp tại trang login,chúng ta có gọi các API cần accesstoken mà accessToken đã bị xóa thì nó lại nhảy vào đây, và cứ thể nó sẽ bị lặp
         location.href = "/login";
       } else {
+        // Đây là trường hợp khi mà chúng ta vẫn còn access token
+        // và chúng ta gọi API ở Next.js Server(Route Handler, Server Component)
         const accessToken = (options?.headers as any).Authorization.split(
           "Bearer "
         )[1];

@@ -10,12 +10,16 @@ export default function LogoutPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const refreshTokenFromURL = searchParams.get("refreshToken");
+  const accessTokenFromURL = searchParams.get("accessToken");
   const ref = useRef<any>(null);
 
   useEffect(() => {
     if (
       ref.current ||
-      refreshTokenFromURL !== getRefreshTokenFromLocalStorage()
+      (refreshTokenFromURL &&
+        refreshTokenFromURL !== getRefreshTokenFromLocalStorage()) ||
+      (accessTokenFromURL &&
+        accessTokenFromURL !== localStorage.getItem("accessToken"))
     )
       return;
     ref.current = mutateAsync().then(() => {
