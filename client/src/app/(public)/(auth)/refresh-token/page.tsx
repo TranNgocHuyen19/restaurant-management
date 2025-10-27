@@ -23,6 +23,8 @@ export default function RefreshTokenPage() {
           router.push(redirectPathName || "/");
         },
       });
+    } else {
+      router.push("/");
     }
   }, [refreshTokenFromURL, redirectPathName, router]);
 

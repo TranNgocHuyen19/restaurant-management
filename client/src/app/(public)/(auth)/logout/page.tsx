@@ -15,20 +15,22 @@ export default function LogoutPage() {
 
   useEffect(() => {
     if (
-      ref.current ||
-      (refreshTokenFromURL &&
-        refreshTokenFromURL !== getRefreshTokenFromLocalStorage()) ||
-      (accessTokenFromURL &&
-        accessTokenFromURL !== localStorage.getItem("accessToken"))
-    )
-      return;
-    ref.current = mutateAsync().then(() => {
-      setTimeout(() => {
-        ref.current = null;
-      }, 1000);
-      router.push("/login");
-    });
-  }, [mutateAsync, router]);
+      !ref.current &&
+      ((refreshTokenFromURL &&
+        refreshTokenFromURL === getRefreshTokenFromLocalStorage()) ||
+        (accessTokenFromURL &&
+          accessTokenFromURL === localStorage.getItem("accessToken")))
+    ) {
+      ref.current = mutateAsync().then(() => {
+        setTimeout(() => {
+          ref.current = null;
+        }, 1000);
+        router.push("/login");
+      });
+    } else {
+      router.push("/");
+    }
+  }, [mutateAsync, router, accessTokenFromURL, refreshTokenFromURL]);
 
-  return <div>Logout</div>;
+  return <div>Logout...</div>;
 }
