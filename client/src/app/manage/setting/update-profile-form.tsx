@@ -48,7 +48,7 @@ export default function UpdateProfileForm() {
       });
     }
   }, [data, form]);
-  async function onSubmit(values: UpdateMeBodyType) {
+  const onSubmit = async (values: UpdateMeBodyType) => {
     if (updateMeMutation.isPending) return;
     try {
       let body = values;
@@ -75,7 +75,7 @@ export default function UpdateProfileForm() {
         setError: form.setError,
       });
     }
-  }
+  };
 
   const reset = () => {
     form.reset();

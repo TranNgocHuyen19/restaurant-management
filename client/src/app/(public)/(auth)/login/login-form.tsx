@@ -47,6 +47,7 @@ export default function LoginForm() {
       toast.success("", {
         description: result.payload.message,
       });
+      setIsAuth(true);
       router.push("/manage/dashboard");
     } catch (error) {
       handleErrorApi({ error, setError: form.setError });
