@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 import jwt from "jsonwebtoken";
 import authApiRequest from "@/apiRequests/auth";
-import { on } from "events";
+import { DishStatus } from "@/constants/type";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -91,6 +91,7 @@ export const checkAndRefreshToken = async (param?: {
     removeTokensFromLocalStorage();
     return param?.onError && param.onError();
   }
+  console.log("Access token expires at:", decodeAccessToken.exp);
   //Ví dụ access token có thời gian hết hạn là 10s
   // thì sẽ kiếm trả còn 1/3 thời gian thì sẽ cho refresh token lại
   // thời gian còn lại sẽ tính dựa trên công thức decodeAccessToken.exp - currentTime
@@ -103,9 +104,29 @@ export const checkAndRefreshToken = async (param?: {
       const res = await authApiRequest.refreshToken();
       setAccessTokenToLocalStorage(res.payload.data.accessToken);
       setRefreshTokenToLocalStorage(res.payload.data.refreshToken);
-      param?.onSuccess && param.onSuccess();
+      if (param?.onSuccess) param.onSuccess();
     } catch (error) {
-      param?.onError && param.onError();
+      if (param?.onError) param.onError();
     }
+  }
+};
+
+export const formatCurrency = (number: number) => {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(number);
+};
+
+export const getVietnameseDishStatus = (
+  status: (typeof DishStatus)[keyof typeof DishStatus]
+) => {
+  switch (status) {
+    case DishStatus.Available:
+      return "Có sẵn";
+    case DishStatus.Unavailable:
+      return "Không có sẵn";
+    default:
+      return "Ẩn";
   }
 };

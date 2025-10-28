@@ -26,7 +26,6 @@ import { useGetAccount, useUpdateAccountMutation } from "@/queries/useAccount";
 import { handleErrorApi } from "@/lib/utils";
 import { useUploadMediaMutation } from "@/queries/useMedia";
 import { toast } from "sonner";
-import { set } from "zod";
 
 export default function EditEmployee({
   id,
@@ -107,7 +106,7 @@ export default function EditEmployee({
         onSubmitSuccess();
       }
       reset();
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError,

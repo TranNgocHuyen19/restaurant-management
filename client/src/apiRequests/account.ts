@@ -1,6 +1,5 @@
 import http from "@/lib/http";
 import {
-  AccountIdParamType,
   AccountListResType,
   AccountResType,
   ChangePasswordBodyType,
@@ -8,7 +7,6 @@ import {
   UpdateEmployeeAccountBodyType,
   UpdateMeBodyType,
 } from "@/schemaValidations/account.schema";
-import { id } from "zod/v4/locales";
 
 const PREFIX = "/accounts";
 const accountApiRequests = {

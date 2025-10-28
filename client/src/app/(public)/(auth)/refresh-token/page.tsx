@@ -18,8 +18,10 @@ export default function RefreshTokenPage() {
       refreshTokenFromURL &&
       refreshTokenFromURL === getRefreshTokenFromLocalStorage()
     ) {
+      console.log("Valid");
       checkAndRefreshToken({
         onSuccess: () => {
+          console.log("Refresh token successful");
           router.push(redirectPathName || "/");
         },
       });
